@@ -4,7 +4,7 @@ A Yaml (configuration) wrapper for Java
 
 What is this Yaml Wrapper
 ------------------------
-This Yaml Wrapper project is a wrapper on the SnakeYAML library, this wrapper allows you to use the Yaml stuff very easily object based which is perfectly to use for configuration or data files. The wrapper also allows you to easily save and load the Yaml object to an external Yaml file.
+This Yaml Wrapper is a wrapper for the SnakeYAML library, this wrapper allows you to use the Yaml stuff very easily using a object based structure which is also perfectly to use for configuration or data files. The wrapper also allows you to easily save and load the Yaml object to an external Yaml file.
 
 Contributing
 ------------
