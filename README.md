@@ -1,6 +1,6 @@
 [![Build status on Travis CI](https://travis-ci.org/timvisee/yaml-wrapper.svg?branch=master)](https://travis-ci.org/timvisee/yaml-wrapper)
 
-# Yaml Wrapper
+# YAML Wrapper
 A YAML wrapper for Java to make it much easier to use these configuration files.
 
 ## Features
@@ -23,8 +23,8 @@ A runnable usage example is included in the [Main.java](src/main/java/com/timvis
 
 ## Contributing
 1. Fork the project.
-2. Create a branch: `git checkout -b my_feature_branch`
+2. Create a branch: `git checkout -b my-feature-branch`
 3. Commit your changes: `git commit -m "Add new specific feature"`
-4. Push to the branch: `git push origin my_feature_branch`
+4. Push to the branch: `git push origin my-feature-branch`
 5. Open a [Pull Request](https://github.com/timvisee/yaml-wrapper/compare).
 6. Enjoy a refreshing Diet Coke and wait.
