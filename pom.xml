@@ -10,7 +10,7 @@
     <version>1.1</version>
 
     <name>YamlWrapper</name>
-    <description>TODO</description>
+    <description>A YAML wrapper for Java to make it much easier to use these configuration files</description>
     <inceptionYear>2013</inceptionYear>
     <url>https://github.com/timvisee/YamlWrapper</url>
 
