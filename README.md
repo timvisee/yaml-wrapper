@@ -21,6 +21,14 @@ This library is perfect to use for your own project if you'd like to implement Y
 ## Usage / Example
 A runnable usage example is included in the [Main.java](src/main/java/com/timvisee/yamlwrapper/Main.java) file.
 
+## Builds
+The project is currently being built automatically using the CI services in the table below.
+
+|Service|Platform|Branch|Build Status||
+|:---:|:---:|:---:|:---|---|
+|Travis CI|Linux|master|[![Build status on Travis CI](https://travis-ci.org/timvisee/yaml-wrapper.svg?branch=master)](https://travis-ci.org/timvisee/yaml-wrapper)|[View status](https://travis-ci.org/timvisee/yaml-wrapper)|
+|Travis CI|Linux|last commit|[![Build status on Travis CI](https://travis-ci.org/timvisee/yaml-wrapper.svg)](https://travis-ci.org/timvisee/yaml-wrapper)|[View status](https://travis-ci.org/timvisee/yaml-wrapper)|
+
 ## Contributing
 1. Fork the project.
 2. Create a branch: `git checkout -b my-feature-branch`
