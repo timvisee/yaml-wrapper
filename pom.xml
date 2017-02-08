@@ -66,7 +66,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>1.8</source>
+                    <source>${javaVersion}</source>
                     <target>${javaVersion}</target>
                 </configuration>
             </plugin>
@@ -88,10 +88,10 @@
                         </goals>
                         <configuration>
                             <relocations>
-                                <!--<relocation>-->
-                                    <!--<pattern>com.google</pattern>-->
-                                    <!--<shadedPattern>com.timvisee.safecreeper.libs.google</shadedPattern>-->
-                                <!--</relocation>-->
+                                <relocation>
+                                    <pattern>org.yaml.snakeyaml</pattern>
+                                    <shadedPattern>com.timvisee.yamlwrapper.lib.snakeyaml</shadedPattern>
+                                </relocation>
                             </relocations>
                         </configuration>
                     </execution>
