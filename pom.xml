@@ -78,6 +78,9 @@
                 <version>2.4.3</version>
                 <configuration>
                     <createDependencyReducedPom>false</createDependencyReducedPom>
+
+                    <!-- Set the proper final name for the shaded file. -->
+                    <finalName>${project.finalName}</finalName>
                 </configuration>
                 <executions>
                     <execution>
@@ -88,6 +91,7 @@
                         </goals>
                         <configuration>
                             <relocations>
+                                <!-- Relocate the SnakeYaml library to prevent weird collisions. -->
                                 <relocation>
                                     <pattern>org.yaml.snakeyaml</pattern>
                                     <shadedPattern>com.timvisee.yamlwrapper.lib.snakeyaml</shadedPattern>
