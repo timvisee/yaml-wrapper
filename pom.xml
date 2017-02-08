@@ -101,7 +101,13 @@
     </build>
 
     <dependencies>
-        <!-- TODO: Add SnakeYaml repository -->
+        <!-- SnakeYaml library -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <scope>runtime</scope>
+            <version>1.17</version>
+        </dependency>
 
         <!-- JUnit unit testing -->
         <dependency>
