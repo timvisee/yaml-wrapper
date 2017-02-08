@@ -1,3 +1,5 @@
+[![Build status on Travis CI](https://travis-ci.org/timvisee/yaml-wrapper.svg?branch=master)](https://travis-ci.org/timvisee/yaml-wrapper)
+
 # Yaml Wrapper
 A YAML wrapper for Java to make it much easier to use these configuration files.
 

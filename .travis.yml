@@ -1,0 +1,7 @@
+# Don't require sudo, to speed up builds
+sudo: false
+
+language: java
+jdk: oraclejdk8
+
+script: mvn clean verify -B
