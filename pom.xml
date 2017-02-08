@@ -108,13 +108,5 @@
             <scope>runtime</scope>
             <version>1.17</version>
         </dependency>
-
-        <!-- JUnit unit testing -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-            <version>4.12</version>
-        </dependency>
     </dependencies>
 </project>
