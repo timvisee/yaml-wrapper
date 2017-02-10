@@ -1,10 +1,20 @@
-package com.timvisee.yamlwrapper;
+package com.timvisee.yamlwrapper.example;
+
+import com.timvisee.yamlwrapper.YamlConfiguration;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Main {
+/**
+ * Example class that shows the usage of the library.
+ */
+public class Example {
 
+    /**
+     * Entry point for example script.
+     *
+     * @param args Startup arguments.
+     */
 	public static void main(String[] args) {
 		// Construct a YamlConfiguration instance
 		YamlConfiguration config = new YamlConfiguration();

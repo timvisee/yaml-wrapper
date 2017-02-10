@@ -19,7 +19,7 @@ and provides a nice, clean and easy to use set of classes as abstraction.
 This library is perfect to use for your own project if you'd like to implement YAML configuration file support.
 
 ## Usage / Example
-A runnable usage example is included in the [Main.java](src/main/java/com/timvisee/yamlwrapper/Main.java) file.
+A runnable usage example is included in the [Example.java](src/main/java/com/timvisee/yamlwrapper/example/Example.java) file.
 
 ## Builds
 The project is currently being built automatically using the CI services in the table below.
