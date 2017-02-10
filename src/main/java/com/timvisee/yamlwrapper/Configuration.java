@@ -1,6 +1,4 @@
-package com.timvisee.yamlwrapper.configuration;
-
-import com.timvisee.yamlwrapper.configuration.ConfigurationSection;
+package com.timvisee.yamlwrapper;
 
 public class Configuration extends ConfigurationSection {
 

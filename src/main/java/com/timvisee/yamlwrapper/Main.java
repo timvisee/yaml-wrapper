@@ -3,8 +3,6 @@ package com.timvisee.yamlwrapper;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.timvisee.yamlwrapper.configuration.YamlConfiguration;
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -30,7 +28,7 @@ public class Main {
 						})
 					)
 				);
-		
+
 		// Show a status message
 		System.out.println("Reading some values...\n");
 

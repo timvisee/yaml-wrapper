@@ -1,4 +1,4 @@
-package com.timvisee.yamlwrapper.configuration;
+package com.timvisee.yamlwrapper;
 
 import java.io.File;
 import java.io.FileNotFoundException;
