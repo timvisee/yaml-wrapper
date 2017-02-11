@@ -2,6 +2,9 @@ package com.timvisee.yamlwrapper;
 
 public class Configuration extends ConfigurationSection {
 
+    /**
+     * Constructor.
+     */
 	public Configuration() {
 		super(null, "", null);
 	}

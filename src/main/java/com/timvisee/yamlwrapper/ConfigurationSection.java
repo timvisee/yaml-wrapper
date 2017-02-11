@@ -6,113 +6,145 @@ import java.util.List;
 import java.util.Map;
 
 public class ConfigurationSection {
-	
-	ConfigurationSection parent;
-	String key;
-	Object val;
+
+    /**
+     * Parent configuration section.
+     */
+    private ConfigurationSection parent;
+
+    /**
+     * Key of the current configuration section.
+     */
+    private String key;
+
+    /**
+     * Value of the current configuration section.
+     */
+    private Object value;
 	
 	/**
-	 * Constructor
-	 * @param String key Key
-	 * @param Object val Value
+	 * Constructor.
+     *
+	 * @param key Section key.
+	 * @param value Section value.
 	 */
-	public ConfigurationSection(String key, Object val) {
+	public ConfigurationSection(String key, Object value) {
 		this.parent = null;
 		this.key = key;
-		this.val = val;
+		this.value = value;
 	}
 	
 	/**
-	 * Constructor
-	 * @param ConfigurationSection parent Parent section
-	 * @param String key Key
-	 * @param Object val Value
+	 * Constructor.
+     *
+	 * @param parent Parent section.
+	 * @param key Section key.
+	 * @param value Section value.
 	 */
-	public ConfigurationSection(ConfigurationSection parent, String key, Object val) {
+	public ConfigurationSection(ConfigurationSection parent, String key, Object value) {
 		this.parent = parent;
 		this.key = key;
-		this.val = val;
+		this.value = value;
 	}
 	
 	/**
-	 * Return the parent of this configuration section
-	 * @return
+	 * Get the parent configuration section.
+     * Null will be returned if this is the root section.
+     *
+	 * @return Parent section.
 	 */
 	public ConfigurationSection getParent() {
 		return this.parent;
 	}
 	
 	/**
-	 * Is the configuration section the root of the config file
-	 * @return True if root
+	 * Check whether this configuration section is the root.
+     *
+	 * @return True if this section is the root, false if not.
 	 */
 	public boolean isRoot() {
 		return (this.parent == null);
 	}
 	
 	/**
-	 * Get the root configuration section
-	 * @return
+	 * Get the root configuration section this section is part of.
+     *
+	 * @return Root section.
 	 */
 	public ConfigurationSection getRoot() {
-		// If the current configuration seciton is the root, return this
+		// Check whether this section is the root, return it in that case
 		if(isRoot())
 			return this;
 		
-		// Return the parent's root
+		// Return the parent root
 		return this.parent.getRoot();
 	}
 	
 	/**
-	 * Get the (key) path
-	 * @return (Key) Path
+	 * Get the path of the configuration section.
+     *
+	 * @return Section path.
 	 */
 	public String getPath() {
-		// Is this the root
+		// Return an empty string if this is the root
 		if(isRoot())
 			return "";
 		
-		// Is the parent the root
+		// If the parent configuration section is the root, return the key of the current
 		if(this.parent.isRoot())
 			return this.key;
-		
-		String path = "";
+
+        // Create a string builder for the section path
+		StringBuilder path = new StringBuilder();
+
+		// Append the parent path if his isn't the root
 		if(!isRoot())
-			path = this.parent.getPath() + ".";
-		path += this.key;
-		return path;
+			path.append(this.parent.getPath()).append(".");
+
+		// Append the current path
+		path.append(this.key);
+
+		// Return the path
+		return path.toString();
 	}
 	
 	/**
-	 * Get the name of this configuration section
-	 * @return Name of this configuration section
+	 * Get the name of this configuration section.
+     * Alias for {@code getKey()}.
+     *
+	 * @return Section name.
 	 */
 	public String getName() {
 		return getKey();
 	}
 	
 	/**
-	 * Get the key
-	 * @return Key
+	 * Get the configuration section key.
+     *
+	 * @return Section key.
 	 */
 	public String getKey() {
 		return this.key;
 	}
-	
+
 	/**
-	 * Get a value
-	 * @param path Path to configuration section
-	 * @return Value
+	 * Get the raw configuration section value.
+     *
+	 * @param path Path of the section.
+     *
+	 * @return Value to get.
 	 */
 	public Object get(String path) {
 		return get(path, null);
 	}
 	
 	/**
-	 * Get a value
-	 * @param path Path to configuration section
-	 * @param def Default value
-	 * @return Value
+	 * Get the raw configuration section value for the given path.
+     *
+	 * @param path Path of the section.
+	 * @param def Default value if the section wasn't found.
+     *
+	 * @return Raw section value.
 	 */
 	public Object get(String path, Object def) {
 		// Make sure the path is not null
@@ -124,10 +156,10 @@ public class ConfigurationSection {
 		
 		// Is the path leading to this section
 		if(path.equals(""))
-			return this.val;
+			return this.value;
 		
 		// Get the section this path is leading to
-		ConfigurationSection section = getConfigurationSection(path);
+		final ConfigurationSection section = getConfigurationSection(path);
 		
 		// Make sure the section is not null
 		if(section == null)
@@ -138,331 +170,375 @@ public class ConfigurationSection {
 	}
 	
 	/**
-	 * Get a String value
-	 * @param path Path to configuration section
-	 * @return String value
+	 * Get a string value at the given path.
+     *
+	 * @param path Path of the section.
+     *
+	 * @return String value.
 	 */
 	public String getString(String path) {
 		return getString(path, "");
 	}
 	
 	/**
-	 * Get a String value
-	 * @param path Path to configuration section
-	 * @param def Default value
-	 * @return String value
+	 * Get a string value at the given path.
+     *
+	 * @param path Path of the value.
+	 * @param def Default value if the path doesn't exist.
+     *
+	 * @return String value.
 	 */
 	public String getString(String path, String def) {
 		// Get the value
-		Object val = get(path);
+		final Object value = get(path);
 		
 		// Make sure the value is not null
-		if(val == null)
+		if(value == null)
 			return def;
 		
 		// The value has to be an instance of a boolean
-		if(val instanceof String)
-			return (String) val;
+		if(value instanceof String)
+			return (String) value;
 		return def;
 	}
 	
 	/**
-	 * Is the value an instance of a string
-	 * @param path Path to the value
-	 * @return True if the value is an instance of a string
+	 * Check whether the value at the given path is a string.
+     *
+	 * @param path Path of the value.
+     *
+	 * @return True if the value is a string, false if not.
 	 */
 	public boolean isString(String path) {
 		// Get the value
-		Object val = get(path);
+		final Object value = get(path);
 		
 		// Make sure the value is not null
-		if(val == null)
+		if(value == null)
 			return false;
 		
 		// Is the value an instance of a string
-		return (val instanceof String);
+		return (value instanceof String);
 	}
 	
 	/**
-	 * Get a String value
-	 * @param path Path to configuration section
-	 * @return Integer value
+	 * Get an integer value at the given path.
+     *
+	 * @param path Path of the value.
+     *
+	 * @return Integer value.
 	 */
 	public int getInt(String path) {
 		return getInt(path, 0);
 	}
 	
 	/**
-	 * Get a String value
-	 * @param path Path to configuration section
-	 * @param def Default value
-	 * @return Integer value
+	 * Get an integer value at the given path.
+     *
+	 * @param path Path of the value.
+	 * @param def Default value if the path doesn't exist.
+     *
+	 * @return Integer value.
 	 */
 	public int getInt(String path, int def) {
 		// Get the value
-		Object val = get(path);
+		final Object value = get(path);
 		
 		// Make sure the value is not null
-		if(val == null)
+		if(value == null)
 			return def;
 		
-		// The value has to be an instance of a int
-		if(val instanceof Integer)
-			return (Integer) val;
+		// Return the value if it's an integer, return the default if not
+		if(value instanceof Integer)
+			return (Integer) value;
 		return def;
 	}
 	
 	/**
-	 * Is the value an instance of an integer
-	 * @param path Path to the value
-	 * @return True if the value is an instance of an integer
+	 * Check whether the value at the given path is an integer.
+     *
+	 * @param path Path of the value.
+     *
+	 * @return True if the value at the given path is an integer, false if not.
 	 */
 	public boolean isInt(String path) {
 		// Get the value
-		Object val = get(path);
+		final Object value = get(path);
 		
 		// Make sure the value is not null
-		if(val == null)
+		if(value == null)
 			return false;
 		
 		// Is the value an instance of a integer
-		return (val instanceof Integer);
+		return (value instanceof Integer);
 	}
 	
 	/**
-	 * Get a boolean value
-	 * @param path Path to configuration section
-	 * @return Boolean value
+	 * Get a boolean value at the given path.
+     *
+	 * @param path Path of the value
+     *
+	 * @return Boolean value.
 	 */
 	public boolean getBoolean(String path) {
 		return getBoolean(path, false);
 	}
 	
 	/**
-	 * Get a boolean value
-	 * @param path Path to configuration section
-	 * @param def Default value
-	 * @return Boolean value
+	 * Get a boolean value at the given path.
+     *
+	 * @param path Path of the value.
+	 * @param def Default value if the key doesn't exist.
+     *
+	 * @return Boolean value.
 	 */
 	public boolean getBoolean(String path, boolean def) {
 		// Get the value
-		Object val = get(path);
+		final Object value = get(path);
 		
 		// Make sure the value is not null
-		if(val == null)
+		if(value == null)
 			return def;
 		
 		// The value has to be an instance of a boolean
-		if(val instanceof Boolean)
-			return (Boolean) val;
+		if(value instanceof Boolean)
+			return (Boolean) value;
 		return def;
 	}
 	
 	/**
-	 * Is the value an instance of a boolean
-	 * @param path Path to the value
-	 * @return True if the value is an instance of a boolean
+	 * Check whether the value at the given path is a boolean.
+     *
+	 * @param path Path to the value.
+     *
+	 * @return True if the value at the given path is a boolean, false if not.
 	 */
 	public boolean isBoolean(String path) {
 		// Get the value
-		Object val = get(path);
+		final Object value = get(path);
 		
 		// Make sure the value is not null
-		if(val == null)
+		if(value == null)
 			return false;
 		
-		// Is the value an instanceof a boolean
-		return (val instanceof Boolean);
+		// Is the value an instance of a boolean
+		return (value instanceof Boolean);
 	}
 	
 	/**
-	 * Get a boolean value
-	 * @param path Path to configuration section
-	 * @return Boolean value
+	 * Get a double value at the given path.
+     *
+	 * @param path Path of the value.
+     *
+	 * @return Double value.
 	 */
 	public double getDouble(String path) {
 		return getDouble(path, 0);
 	}
 	
 	/**
-	 * Get a boolean value
-	 * @param path Path to configuration section
-	 * @param def Default value
-	 * @return Double value
+	 * Get a double value at the given path.
+     *
+	 * @param path Path of the value.
+	 * @param def Default value if the key doesn't exist.
+     *
+	 * @return Double value.
 	 */
 	public double getDouble(String path, double def) {
 		// Get the value
-		Object val = get(path);
+		final Object value = get(path);
 		
 		// Make sure the value is not null
-		if(val == null)
+		if(value == null)
 			return def;
 		
 		// The value has to be an instance of a boolean
-		if(val instanceof Double)
-			return (Double) val;
+		if(value instanceof Double)
+			return (Double) value;
 		return def;
 	}
 	
 	/**
-	 * Is the value an instance of a double
-	 * @param path Path to the value
-	 * @return True if the value is an instance of a double
+	 * Check whether the value at the given path is a double.
+     *
+	 * @param path Path of the value.
+     *
+	 * @return True if the value at the given path is a double.
 	 */
 	public boolean isDouble(String path) {
 		// Get the value
-		Object val = get(path);
+		final Object value = get(path);
 		
 		// Make sure the value is not null
-		if(val == null)
+		if(value == null)
 			return false;
 		
 		// Is the value an instance of a double
-		return (val instanceof Double);
+		return (value instanceof Double);
 	}
 	
 	/**
-	 * Get a float value
-	 * @param path Path to configuration section
-	 * @return Float value
+	 * Get a float value at the given path.
+     *
+	 * @param path Path of the value.
+     *
+	 * @return Float value.
 	 */
 	public float getFloat(String path) {
 		return getFloat(path, 0);
 	}
 	
 	/**
-	 * Get a float value
-	 * @param path Path to configuration section
-	 * @param def Default value
-	 * @return Float value
+	 * Get a float value at the given path.
+     *
+	 * @param path Path of the value.
+	 * @param def Default value if the key doesn't exist.
+     *
+	 * @return Float value.
 	 */
 	public float getFloat(String path, float def) {
 		// Get the value
-		Object val = get(path);
+		final Object value = get(path);
 		
 		// Make sure the value is not null
-		if(val == null)
+		if(value == null)
 			return def;
 		
 		// The value has to be an instance of a boolean
-		if(val instanceof Float)
-			return (Float) val;
+		if(value instanceof Float)
+			return (Float) value;
 		return def;
 	}
 	
 	/**
-	 * Is the value an instance of a float
-	 * @param path Path to the value
-	 * @return True if the value is an instance of a float
+	 * Check whether the value at the given path is a float.
+     *
+	 * @param path Path of the value.
+     *
+	 * @return True if the value at the given pat his a float.
 	 */
 	public boolean isFloat(String path) {
 		// Get the value
-		Object val = get(path);
+		final Object value = get(path);
 		
 		// Make sure the value is not null
-		if(val == null)
+		if(value == null)
 			return false;
 		
 		// Is the value an instance of a double
-		return (val instanceof Float);
+		return (value instanceof Float);
 	}
 	
 	/**
-	 * Get a long value
-	 * @param path Path to configuration section
-	 * @return Long value
+	 * Get a long value at the given path.
+     *
+	 * @param path Path of the value.
+     *
+	 * @return Long value.
 	 */
 	public long getLong(String path) {
 		return getLong(path, 0);
 	}
 	
 	/**
-	 * Get a long value
-	 * @param path Path to configuration section
-	 * @param def Default value
-	 * @return Long value
+	 * Get a long value at the given path.
+     *
+	 * @param path Path of the value.
+	 * @param def Default value if the path doesn't exist.
+     *
+	 * @return Long value.
 	 */
 	public long getLong(String path, long def) {
 		// Get the value
-		Object val = get(path);
+		final Object value = get(path);
 		
 		// Make sure the value is not null
-		if(val == null)
+		if(value == null)
 			return def;
 		
 		// The value has to be an instance of a long
-		if(val instanceof Long)
-			return (Long) val;
+		if(value instanceof Long)
+			return (Long) value;
 		return def;
 	}
 	
 	/**
-	 * Is the value an instance of a long
-	 * @param path Path to the value
-	 * @return True if the value is an instance of a long
+	 * Check whether the value at the given path is a long.
+     *
+	 * @param path Path of the value.
+     *
+	 * @return True if the value at the given path is a long.
 	 */
 	public boolean isLong(String path) {
 		// Get the value
-		Object val = get(path);
+		final Object value = get(path);
 		
 		// Make sure the value is not null
-		if(val == null)
+		if(value == null)
 			return false;
 		
 		// Is the value an instance of a long
-		return (val instanceof Long);
+		return (value instanceof Long);
 	}
 	
 	/**
-	 * Get a list
-	 * @param path Path to configuration section
-	 * @return List value
+	 * Get a list of values at the given path.
+     *
+	 * @param path Path of the value containing the list.
+     *
+	 * @return List of values.
 	 */
 	public List<?> getList(String path) {
 		return getList(path, null);
 	}
 	
 	/**
-	 * Get a list
-	 * @param path Path to configuration section
-	 * @param def Default value
-	 * @return List
+	 * Get a list of values at the given path.
+     *
+	 * @param path Path of the value containing the list.
+	 * @param def Default value if the path doesn't exist.
+     *
+	 * @return List of values.
 	 */
 	public List<?> getList(String path, List<?> def) {
 		// Get the value
-		Object val = get(path);
+		final Object value = get(path);
 		
 		// Make sure the value is not null
-		if(val == null)
+		if(value == null)
 			return def;
 		
 		// The value has to be an instance of a boolean
-		if(val instanceof List)
-			return (List<?>) val;
+		if(value instanceof List)
+			return (List<?>) value;
 		return def;
 	}
 	
 	/**
-	 * Is the value an instance of a list
-	 * @param path Path to the value
-	 * @return True if the value is an instance of a list
+	 * Check whether the value at the given path is a list of values.
+     *
+	 * @param path Path of the value containing the list.
+     *
+	 * @return True if the value at the given path is a list of value.
 	 */
 	public boolean isList(String path) {
 		// Get the value
-		Object val = get(path);
+		final Object value = get(path);
 		
 		// Make sure the value is not null
-		if(val == null)
+		if(value == null)
 			return false;
 		
 		// Is the value an instance of a list
-		return (val instanceof List);
+		return (value instanceof List);
 	}
 	
 	/**
-	 * Return a list of keys from a configuration section
-	 * @param path Path to the configuration section to get the keys from
-	 * @return List of keys
+	 * Return a list of keys that are inside the given configuration section.
+     *
+	 * @param path Path of the section to get the keys for.
+     *
+	 * @return List of keys.
 	 */
 	public List<String> getKeys(String path) {
 		// Make sure the path is not null
@@ -477,7 +553,7 @@ public class ConfigurationSection {
 			return new ArrayList<String>();
 		
 		// Get the configuration sections to get the keys from
-		ConfigurationSection section = getConfigurationSection(path);
+		final ConfigurationSection section = getConfigurationSection(path);
 		
 		// Make sure the configuration section holds other configuration sections
 		if(!section.isHoldingConfigurationSections())
@@ -485,28 +561,34 @@ public class ConfigurationSection {
 		
 		// Return the list of keys
 		@SuppressWarnings("unchecked")
-		List<ConfigurationSection> sections = (List<ConfigurationSection>) section.get("");
-		List<String> keys = new ArrayList<String>();
-		
+		final List<ConfigurationSection> sections = (List<ConfigurationSection>) section.get("");
+		final List<String> keys = new ArrayList<>();
+
+		// Create a list of keys
 		for(ConfigurationSection entry : sections)
 			keys.add(entry.getKey());
-		
+
+		// Return the list of keys
 		return keys;
 	}
 	
 	/**
-	 * Get the configuration section
-	 * @param path Path to the section
-	 * @return ConfigurationSection or null when no section was found
+	 * Get a configuration section.
+     *
+	 * @param path Path of the section.
+     *
+	 * @return Configuration section.
 	 */
 	public ConfigurationSection getSection(String path) {
 		return getConfigurationSection(path);
 	}
 	
 	/**
-	 * Get the configuration section
-	 * @param path Path to the section
-	 * @return ConfigurationSection or null when no section was found
+	 * Get a configuration section.
+     *
+	 * @param path Path of the section.
+     *
+	 * @return Configuration section.
 	 */
 	public ConfigurationSection getConfigurationSection(String path) {
 		// Make sure the path param is not null
@@ -524,27 +606,24 @@ public class ConfigurationSection {
 		if(!isSet(""))
 			return null;
 		
-		// Does the path contain any subpaths
+		// Does the path contain any sub-paths
 		if(!path.contains(".")) {
-			
-			final String key = path;
-			
 			// Make sure the path is locating to a configuration section
 			if(!isConfigurationSection(path))
 				return null;
 			
 			// Get and return the configuration section
-			if(this.val instanceof List) {
+			if(this.value instanceof List) {
 				// Get the configuration section
 				try {
 					@SuppressWarnings("unchecked")
-					List<ConfigurationSection> sections = (List<ConfigurationSection>) this.val;
+					List<ConfigurationSection> sections = (List<ConfigurationSection>) this.value;
 					for(ConfigurationSection section : sections) {
 						if(section == null) 
 							continue;
 
 						// Is this the section we are searching for
-						if(section.getKey().equals(key))
+						if(section.getKey().equals(path))
 							return section;
 					}
 				} catch(ClassCastException e) { }
@@ -644,13 +723,13 @@ public class ConfigurationSection {
 			
 			// Create a section
 			//ConfigurationSection section = new ConfigurationSection(this, key, null);
-			if(this.val instanceof List) {
+			if(this.value instanceof List) {
 				try {
 					@SuppressWarnings("unchecked")
-					List<ConfigurationSection> sections = (List<ConfigurationSection>) this.val;
+					List<ConfigurationSection> sections = (List<ConfigurationSection>) this.value;
 					ConfigurationSection section = new ConfigurationSection(this, key, null);
 					sections.add(section);
-					this.val = sections;
+					this.value = sections;
 					
 					// Are there any subkeys
 					if(subPath.length() == 0) {
@@ -668,7 +747,7 @@ public class ConfigurationSection {
 			ConfigurationSection section = new ConfigurationSection(this, key, null);
 			List<ConfigurationSection> sections = new ArrayList<ConfigurationSection>();
 			sections.add(section);
-			this.val = sections;
+			this.value = sections;
 			
 			// Are there any subkeys
 			if(subPath.length() == 0) {
@@ -695,7 +774,7 @@ public class ConfigurationSection {
 		
 		// Is the path leading to this section
 		if(path.equals("")) {
-			this.val = val;
+			this.value = val;
 			return;
 		}
 		
@@ -721,23 +800,23 @@ public class ConfigurationSection {
 		} else {
 			// Create a section
 			ConfigurationSection section = new ConfigurationSection(this, key, null);
-			if(this.val instanceof List) {
+			if(this.value instanceof List) {
 				try {
 					@SuppressWarnings("unchecked")
-					List<ConfigurationSection> sections = (List<ConfigurationSection>) this.val;
+					List<ConfigurationSection> sections = (List<ConfigurationSection>) this.value;
 					sections.add(section);
 					
 				} catch(ClassCastException ex) {
 					// Create a new section
 					List<ConfigurationSection> sections = new ArrayList<ConfigurationSection>();
 					sections.add(section);
-					this.val = sections;
+					this.value = sections;
 				}
 			} else {
 				// Create a new section
 				List<ConfigurationSection> sections = new ArrayList<ConfigurationSection>();
 				sections.add(section);
-				this.val = sections;
+				this.value = sections;
 			}
 			
 			// Set the value in the new section
@@ -771,12 +850,12 @@ public class ConfigurationSection {
 	 */
 	public boolean isHoldingConfigurationSections() {
 		// Is the current value null
-		if(this.val == null)
+		if(this.value == null)
 			return false;
 		
 		try {
     		@SuppressWarnings("unchecked")
-			List<ConfigurationSection> sections = (List<ConfigurationSection>) this.val;
+			List<ConfigurationSection> sections = (List<ConfigurationSection>) this.value;
     		if(sections.size() <= 0)
     			return false;
     		
@@ -803,13 +882,13 @@ public class ConfigurationSection {
 			return true;
 		
 		// Is the value of this configuration section a list instance, if not it can't hold any sub sections (so return false)
-		if(!(this.val instanceof List))
+		if(!(this.value instanceof List))
 			return false;
 		
 		// Get the list of configuration sections
 		try {
 			@SuppressWarnings("unchecked")
-			List<ConfigurationSection> sections = (List<ConfigurationSection>) this.val;
+			List<ConfigurationSection> sections = (List<ConfigurationSection>) this.value;
 			for(ConfigurationSection section : sections) {
 				// Make sure the current entry is not null
 				if(section == null)
@@ -854,10 +933,10 @@ public class ConfigurationSection {
 			return out;
 		
 		// Add the values to the 
-        if(this.val instanceof List) {
+        if(this.value instanceof List) {
         	try {
         		@SuppressWarnings("unchecked")
-				List<ConfigurationSection> sections = (List<ConfigurationSection>) this.val;
+				List<ConfigurationSection> sections = (List<ConfigurationSection>) this.value;
         		//Map<String, Object> values = new LinkedHashMap<String, Object>();
         		for(ConfigurationSection entry : sections) {
         			if(entry.isHoldingConfigurationSections())
@@ -867,10 +946,10 @@ public class ConfigurationSection {
         		}
         		//out.put(getKey(), values);
         	} catch(ClassCastException e) {
-        		out.put(getKey(), this.val);
+        		out.put(getKey(), this.value);
         	}
         } else
-        	out.put(getKey(), this.val);
+        	out.put(getKey(), this.value);
         
         // Return the output
         return out;
