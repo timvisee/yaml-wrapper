@@ -36,3 +36,6 @@ The project is currently being built automatically using the CI services in the 
 4. Push to the branch: `git push origin my-feature-branch`
 5. Open a [Pull Request](https://github.com/timvisee/yaml-wrapper/compare).
 6. Enjoy a refreshing Diet Coke and wait.
+
+## License
+This project is released under the GNU GPL-3.0 license. Check out the [LICENSE](LICENSE) file for more information.
