@@ -221,14 +221,23 @@ public class ConfigurationSection {
 		// Is the value an instance of a string
 		return (value instanceof String);
 	}
-	
-	/**
-	 * Get an integer value at the given path.
+
+    /**
+     * Get an integer value from the current configuration section.
      *
-	 * @param path Path of the value.
+     * @return Integer value.
+     */
+    public int getInt() {
+        return getInt("");
+    }
+
+    /**
+     * Get an integer value at the given path.
      *
-	 * @return Integer value.
-	 */
+     * @param path Path of the value.
+     *
+     * @return Integer value.
+     */
 	public int getInt(String path) {
 		return getInt(path, 0);
 	}
@@ -273,7 +282,16 @@ public class ConfigurationSection {
 		// Is the value an instance of a integer
 		return (value instanceof Integer);
 	}
-	
+
+    /**
+     * Get a boolean value from the current configuration section.
+     *
+     * @return Boolean value.
+     */
+    public boolean getBoolean() {
+        return getBoolean("");
+    }
+
 	/**
 	 * Get a boolean value at the given path.
      *
@@ -325,7 +343,16 @@ public class ConfigurationSection {
 		// Is the value an instance of a boolean
 		return (value instanceof Boolean);
 	}
-	
+
+    /**
+     * Get a double value from the current configuration section.
+     *
+     * @return Double value.
+     */
+    public double getDouble() {
+        return getDouble("");
+    }
+
 	/**
 	 * Get a double value at the given path.
      *
@@ -336,7 +363,7 @@ public class ConfigurationSection {
 	public double getDouble(String path) {
 		return getDouble(path, 0);
 	}
-	
+
 	/**
 	 * Get a double value at the given path.
      *
@@ -377,7 +404,16 @@ public class ConfigurationSection {
 		// Is the value an instance of a double
 		return (value instanceof Double);
 	}
-	
+
+    /**
+     * Get a float value from the current configuration section.
+     *
+     * @return Float value.
+     */
+    public float getFloat() {
+        return getFloat("");
+    }
+
 	/**
 	 * Get a float value at the given path.
      *
@@ -429,7 +465,16 @@ public class ConfigurationSection {
 		// Is the value an instance of a double
 		return (value instanceof Float);
 	}
-	
+
+    /**
+     * Get a long value from the current configuration section.
+     *
+     * @return Long value.
+     */
+    public long getLong() {
+        return getLong("");
+    }
+
 	/**
 	 * Get a long value at the given path.
      *
@@ -481,7 +526,16 @@ public class ConfigurationSection {
 		// Is the value an instance of a long
 		return (value instanceof Long);
 	}
-	
+
+    /**
+     * Get a list of values from the current configuration section.
+     *
+     * @return List of values.
+     */
+    public List<?> getList() {
+        return getList("");
+    }
+
 	/**
 	 * Get a list of values at the given path.
      *
@@ -533,7 +587,16 @@ public class ConfigurationSection {
 		// Is the value an instance of a list
 		return (value instanceof List);
 	}
-	
+
+    /**
+     * Return a list of keys that are inside the current configuration section.
+     *
+     * @return List of keys.
+     */
+    public List<String> getKeys() {
+        return getKeys("");
+    }
+
 	/**
 	 * Return a list of keys that are inside the given configuration section.
      *
@@ -761,7 +824,17 @@ public class ConfigurationSection {
 			return section.createConfigurationSection(subPath);
 		}
 	}
-	
+
+    /**
+     * Set a value in the current configuration section.
+     * The type of the value is determined automatically.
+     *
+     * @param value The actual value.
+     */
+    public void set(Object value) {
+        set("", value);
+    }
+
 	/**
 	 * Set a value.
      * The type of the value is determined automatically.
