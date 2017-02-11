@@ -1,103 +1,148 @@
 package com.timvisee.yamlwrapper;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Map;
-
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 import org.yaml.snakeyaml.error.YAMLException;
 import org.yaml.snakeyaml.representer.Representer;
 
-public class YamlConfiguration extends FileConfiguration {
-    
-	private DumperOptions yamlOptions = new DumperOptions();
-    private Representer yamlRepresenter = new Representer();
-    private Yaml yaml = new Yaml(new Constructor(), yamlRepresenter, yamlOptions);
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
 
-	public String saveToString() {	    
-		yamlOptions.setIndent(2);
-        yamlOptions.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-        yamlRepresenter.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+public class YamlConfiguration extends FileConfiguration {
+
+    /**
+     * YAML configuration options.
+     */
+    private DumperOptions options = new DumperOptions();
+
+    /**
+     * YAML representer.
+     */
+    private Representer representer = new Representer();
+
+    /**
+     * YAML instance, holding the configuration.
+     */
+    private Yaml yaml = new Yaml(new Constructor(), representer, options);
+
+    /**
+     * Save the YAML configuration to a string.
+     *
+     * @return String holding the YAML configuration.
+     */
+	public String saveToString() {
+	    // Set the indent format
+		options.setIndent(2);
+
+		// Set the default flow style
+        options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+        representer.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
 
         // Return the configuration string
         return yaml.dump(getValues());
 	}
-	
-    public void loadFromString(String contents) {
+
+    /**
+     * Load a YAML configuration from the given string.
+     *
+     * @param config String holding the YAML configuration.
+     */
+    public void loadFromString(String config) {
         // Make sure the contents are not null
-    	if(contents == null)
+    	if(config == null)
     		return;
 
+    	// Create a map to store the configuration in
         Map<?, ?> input = null;
         try {
-            input = (Map<?, ?>) yaml.load(contents);
-        } catch (YAMLException e) {
-            e.printStackTrace();
-        } catch (ClassCastException e) {
+            input = (Map<?, ?>) yaml.load(config);
+
+        } catch (YAMLException | ClassCastException e) {
             e.printStackTrace();
         }
-        
-        if (input != null) {
+
+        // Convert sub-maps to sub-sections
+        if(input != null)
             convertMapsToSections(input, this);
-        }
     }
 
-    public static YamlConfiguration loadConfiguration(File f) {
-        // Make sure the file param is not null
-    	if(f == null)
+    /**
+     * Load a YAML configuration from the given file.
+     *
+     * @param file File to load the configuration from.
+     *
+     * @return Loaded YAML configuration.
+     */
+    public static YamlConfiguration loadFromFile(File file) {
+        // Return an empty configuration if the file is null
+    	if(file == null)
     		return new YamlConfiguration();
 
     	// Create a new configuration instance
-        YamlConfiguration config = new YamlConfiguration();
+        final YamlConfiguration config = new YamlConfiguration();
 
+        // Try to load the configuration file
         try {
-            config.load(f);
-        } catch (FileNotFoundException e) {
+            config.load(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        // Return the configuration
         return config;
     }
 
-    public static YamlConfiguration loadConfiguration(InputStream stream) {
-    	// Make sure the stream param is not null
+    /**
+     * Load a YAML configuration from the given input stream.
+     *
+     * @param stream Input stream to load the configuration from.
+     *
+     * @return Loaded YAML configuration.
+     */
+    public static YamlConfiguration loadFromStream(InputStream stream) {
+    	// Return an empty configuration if the stream is null
     	if(stream == null)
     		return new YamlConfiguration();
 
     	// Create a new configuration instance
-        YamlConfiguration config = new YamlConfiguration();
+        final YamlConfiguration config = new YamlConfiguration();
 
+        // Load the configuration
         try {
             config.load(stream);
-        } catch (FileNotFoundException e) {
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        // Return the configuration
         return config;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    private void convertMapsToSections(Map<?, ?> input, ConfigurationSection section) {
-    	for(Map.Entry<?, ?> entry : input.entrySet()) {
-            String key = entry.getKey().toString();
-            Object val = entry.getValue();
 
-            if (val instanceof Map)
-                convertMapsToSections((Map<?, ?>) val, section.createSection(key));
+    /**
+     * Convert a map to a configuration section.
+     * The parser creates a map holding the configuration.
+     * Since we're not working with maps directly, this method can be used to convert these maps to proper configuration sections.
+     * Sub-maps are automatically converted to sub-sections.
+     *
+     * @param input Input map, that should be converted.
+     *
+     * @param section Base configuration section.
+     */
+    private void convertMapsToSections(Map<?, ?> input, ConfigurationSection section) {
+        // Loop through the map entries to convert it
+    	for(Map.Entry<?, ?> entry : input.entrySet()) {
+    	    // Get the key and value
+            final String key = entry.getKey().toString();
+            final Object value = entry.getValue();
+
+            // Set the value
+            if (value instanceof Map)
+                convertMapsToSections((Map<?, ?>) value, section.createSection(key));
             else
-                section.set(key, val);
+                section.set(key, value);
         }
     }
 }
