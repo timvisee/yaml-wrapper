@@ -47,6 +47,7 @@ public class YamlConfiguration extends FileConfiguration {
 
     /**
      * Load a YAML configuration from the given string.
+     * An empty configuration object is returned if the configuration in the string is invalid.
      *
      * @param config String holding the YAML configuration.
      */
@@ -70,7 +71,28 @@ public class YamlConfiguration extends FileConfiguration {
     }
 
     /**
+     * Load a YAML configuration from the given file path.
+     * An empty configuration object is returned if the file doesn't exist or was invalid.
+     *
+     * @param filePath File path to load the configuration from.
+     *
+     * @return Loaded YAML configuration.
+     */
+    public static YamlConfiguration loadFromFile(String filePath) {
+        // Create a file instance
+        final File file = new File(filePath);
+
+        // Make sure the file exists
+        if(!file.isFile())
+            return new YamlConfiguration();
+
+        // Load the configuration file and return it
+        return loadFromFile(file);
+    }
+
+    /**
      * Load a YAML configuration from the given file.
+     * An empty configuration object is returned if the file doesn't exist or was invalid.
      *
      * @param file File to load the configuration from.
      *
@@ -97,6 +119,7 @@ public class YamlConfiguration extends FileConfiguration {
 
     /**
      * Load a YAML configuration from the given input stream.
+     * An empty configuration object is returned if the input stream is invalid.
      *
      * @param stream Input stream to load the configuration from.
      *
