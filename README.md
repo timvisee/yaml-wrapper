@@ -49,8 +49,9 @@ This JAR-file should be added as _library_ to your own project, in order to use 
 
 ## Download
 |File|Build Status|Download|
-|:---:|:---:|:---|
+|:---|:---:|:---|
 |JAR library|Latest successful|[Download](http://ci.xephi.fr/job/YamlWrapper/lastSuccessfulBuild/artifact/target/)|
+|ZIP with JAR library|Latest successful|[Download](http://ci.xephi.fr/job/YamlWrapper/lastSuccessfulBuild/artifact/target/*zip*/target.zip)|
 
 All JAR-files for the YAML wrapper library can be found and downloaded from on our [Jenkins](http://ci.xephi.fr/job/YamlWrapper/) page.
 It is recommended however, to compile your own JAR-file using Maven whenever that's possible.
