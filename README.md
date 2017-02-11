@@ -18,7 +18,37 @@ The wrapper uses the SnakeYaml library as it's backend for interacting with YAML
 and provides a nice, clean and easy to use set of classes as abstraction.
 This library is perfect to use for your own project if you'd like to implement YAML configuration file support.
 
-## Usage / Example
+## Usage
+To use the YAML wrapper library in your own project, you must include it as dependency.
+The library can be added to your project by using Maven, or it can be done manually by adding the library JAR-file. See below.
+
+### Usage with Maven
+Include the following repository and dependency in your Maven configuration to use the YAML wrapper in your own project.
+```
+<repositories>
+    <!-- Xephi repository -->
+    <repository>
+        <id>xephi-repo</id>
+        <url>http://ci.xephi.fr/plugin/repository/everything/</url>
+    </repository>
+</repositories>
+
+<dependencies>
+    <!-- YAML wrapper library -->
+    <dependency>
+        <groupId>com.timvisee</groupId>
+        <artifactId>yamlwrapper</artifactId>
+        <version>LATEST</version>
+    </dependency>
+</dependencies>
+```
+
+### Usage without Maven
+The JAR-files for the YAML wrapper library can be found on our [Jenkins](http://ci.xephi.fr/job/YamlWrapper/), the latest JAR-file can be found [here](http://ci.xephi.fr/job/YamlWrapper/lastSuccessfulBuild/artifact/target/).
+This JAR-file should be added as _library_ to your own project, in order to use it.
+It is recommended however, to compile your own JAR-file using Maven whenever that's possible.
+
+## Example
 A runnable usage example is included in the [Example.java](src/main/java/com/timvisee/yamlwrapper/example/Example.java) file.
 
 ## Builds
@@ -26,6 +56,7 @@ The project is currently being built automatically using the CI services in the 
 
 |Service|Platform|Branch|Build Status||
 |:---:|:---:|:---:|:---|---|
+|Jenkins|Linux|master|[![Build status on Jenkins](https://img.shields.io/jenkins/s/https/ci.xephi.fr/job/YamlWrapper.svg)](http://ci.xephi.fr/job/YamlWrapper/)|[View status](http://ci.xephi.fr/job/YamlWrapper/)|
 |Travis CI|Linux|master|[![Build status on Travis CI](https://travis-ci.org/timvisee/yaml-wrapper.svg?branch=master)](https://travis-ci.org/timvisee/yaml-wrapper)|[View status](https://travis-ci.org/timvisee/yaml-wrapper)|
 |Travis CI|Linux|last commit|[![Build status on Travis CI](https://travis-ci.org/timvisee/yaml-wrapper.svg)](https://travis-ci.org/timvisee/yaml-wrapper)|[View status](https://travis-ci.org/timvisee/yaml-wrapper)|
 
