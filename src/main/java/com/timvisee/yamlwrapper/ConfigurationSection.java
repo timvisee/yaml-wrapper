@@ -128,6 +128,15 @@ public class ConfigurationSection {
 		return this.key;
 	}
 
+    /**
+     * Get the raw configuration section value of the current configuration section.
+     *
+     * @return Section value.
+     */
+	public Object get() {
+	    return get("");
+    }
+
 	/**
 	 * Get the raw configuration section value.
      *
