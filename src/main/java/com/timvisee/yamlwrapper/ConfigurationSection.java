@@ -929,7 +929,7 @@ public class ConfigurationSection {
 	
 	/**
      * Get all keys and values in the current configuration section as a map.
-     * All values are an object instance. Values that contain sub-sections are in the same map format.
+     * This method returns a flat map. All sub-sections have a relative path with a dot as section separator in the key.
      *
 	 * @return Map containing all keys and values.
 	 */
@@ -947,14 +947,12 @@ public class ConfigurationSection {
         	try {
         		@SuppressWarnings("unchecked")
 				List<ConfigurationSection> sections = (List<ConfigurationSection>) this.value;
-        		//Map<String, Object> values = new LinkedHashMap<String, Object>();
-        		for(ConfigurationSection entry : sections) {
+        		for(ConfigurationSection entry : sections)
         			if(entry.isHoldingConfigurationSections())
             			out.put(entry.getKey(), entry.getValues());
         			else
         				out.put(entry.getKey(), entry.get(""));
-        		}
-        		//out.put(getKey(), values);
+
         	} catch(ClassCastException e) {
         		out.put(getKey(), this.value);
         	}
