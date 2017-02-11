@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class ConfigurationSection {
 
     /**
@@ -250,7 +251,7 @@ public class ConfigurationSection {
 		
 		// Return the value if it's an integer, return the default if not
 		if(value instanceof Integer)
-			return (Integer) value;
+			return (int) value;
 		return def;
 	}
 	
@@ -302,7 +303,7 @@ public class ConfigurationSection {
 		
 		// The value has to be an instance of a boolean
 		if(value instanceof Boolean)
-			return (Boolean) value;
+			return (boolean) value;
 		return def;
 	}
 	
@@ -354,7 +355,7 @@ public class ConfigurationSection {
 		
 		// The value has to be an instance of a boolean
 		if(value instanceof Double)
-			return (Double) value;
+			return (double) value;
 		return def;
 	}
 	
@@ -406,7 +407,7 @@ public class ConfigurationSection {
 		
 		// The value has to be an instance of a boolean
 		if(value instanceof Float)
-			return (Float) value;
+			return (float) value;
 		return def;
 	}
 	
@@ -458,7 +459,7 @@ public class ConfigurationSection {
 		
 		// The value has to be an instance of a long
 		if(value instanceof Long)
-			return (Long) value;
+			return (long) value;
 		return def;
 	}
 	
