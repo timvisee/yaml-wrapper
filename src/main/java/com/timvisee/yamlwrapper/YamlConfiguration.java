@@ -14,6 +14,16 @@ import java.util.Map;
 public class YamlConfiguration extends FileConfiguration {
 
     /**
+     * Indentation size for YAML configurations that are saved.
+     */
+    private static final int YAML_INDENT_SIZE = 4;
+
+    /**
+     * YAML flow style.
+     */
+    private static final DumperOptions.FlowStyle YAML_FLOW_STYLE = DumperOptions.FlowStyle.BLOCK;
+
+    /**
      * YAML configuration options.
      */
     private DumperOptions options = new DumperOptions();
@@ -29,18 +39,23 @@ public class YamlConfiguration extends FileConfiguration {
     private Yaml yaml = new Yaml(new Constructor(), representer, options);
 
     /**
+     * Constructor.
+     */
+    public YamlConfiguration() {
+        // Set the indent format
+        options.setIndent(YAML_INDENT_SIZE);
+
+        // Set the default flow style
+        options.setDefaultFlowStyle(YAML_FLOW_STYLE);
+        representer.setDefaultFlowStyle(YAML_FLOW_STYLE);
+    }
+
+    /**
      * Save the YAML configuration to a string.
      *
      * @return String holding the YAML configuration.
      */
 	public String saveToString() {
-	    // Set the indent format
-		options.setIndent(2);
-
-		// Set the default flow style
-        options.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-        representer.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
-
         // Return the configuration string
         return yaml.dump(getValues());
 	}
