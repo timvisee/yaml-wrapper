@@ -20,6 +20,11 @@
         <url>https://github.com/timvisee/YamlWrapper</url>
     </scm>
 
+    <ciManagement>
+        <system>jenkins</system>
+        <url>http://ci.xephi.fr/job/YamlWrapper/</url>
+    </ciManagement>
+
     <issueManagement>
         <system>GitHub</system>
         <url>https://github.com/timvisee/YamlWrapper/issues</url>
