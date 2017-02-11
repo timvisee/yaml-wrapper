@@ -211,7 +211,16 @@ public class ConfigurationSection {
 			return (String) value;
 		return def;
 	}
-	
+
+    /**
+     * Check whether the value of the current configuration section is a string.
+     *
+     * @return True if the value is a string, false if not.
+     */
+    public boolean isString() {
+        return isString("");
+    }
+
 	/**
 	 * Check whether the value at the given path is a string.
      *
@@ -272,7 +281,16 @@ public class ConfigurationSection {
 			return (int) value;
 		return def;
 	}
-	
+
+    /**
+     * Check whether the value of the current configuration section is an integer.
+     *
+     * @return True if the value is an integer, false if not.
+     */
+    public boolean isInt() {
+        return isInt("");
+    }
+
 	/**
 	 * Check whether the value at the given path is an integer.
      *
@@ -333,7 +351,16 @@ public class ConfigurationSection {
 			return (boolean) value;
 		return def;
 	}
-	
+
+    /**
+     * Check whether the value of the current configuration section is a boolean.
+     *
+     * @return True if the value is a boolean, false if not.
+     */
+    public boolean isBoolean() {
+        return isBoolean("");
+    }
+
 	/**
 	 * Check whether the value at the given path is a boolean.
      *
@@ -394,7 +421,16 @@ public class ConfigurationSection {
 			return (double) value;
 		return def;
 	}
-	
+
+    /**
+     * Check whether the value of the current configuration section is a double.
+     *
+     * @return True if the value is a double.
+     */
+    public boolean isDouble() {
+        return isDouble("");
+    }
+
 	/**
 	 * Check whether the value at the given path is a double.
      *
@@ -455,13 +491,22 @@ public class ConfigurationSection {
 			return (float) value;
 		return def;
 	}
-	
+
+    /**
+     * Check whether the value of the current configuration section is a float.
+     *
+     * @return True if the value is a float.
+     */
+    public boolean isFloat() {
+        return isFloat("");
+    }
+
 	/**
 	 * Check whether the value at the given path is a float.
      *
 	 * @param path Path of the value.
      *
-	 * @return True if the value at the given pat his a float.
+	 * @return True if the value at the given path is a float.
 	 */
 	public boolean isFloat(String path) {
 		// Get the value
@@ -516,7 +561,16 @@ public class ConfigurationSection {
 			return (long) value;
 		return def;
 	}
-	
+
+    /**
+     * Check whether the value of the current configuration section is a long.
+     *
+     * @return True if the value is a long.
+     */
+    public boolean isLong() {
+        return isLong("");
+    }
+
 	/**
 	 * Check whether the value at the given path is a long.
      *
@@ -577,13 +631,22 @@ public class ConfigurationSection {
 			return (List<?>) value;
 		return def;
 	}
-	
+
+    /**
+     * Check whether the value of the current configuration section is a list.
+     *
+     * @return True if the value is a list of values.
+     */
+    public boolean isList() {
+        return isList("");
+    }
+
 	/**
 	 * Check whether the value at the given path is a list of values.
      *
 	 * @param path Path of the value containing the list.
      *
-	 * @return True if the value at the given path is a list of value.
+	 * @return True if the value at the given path is a list of values.
 	 */
 	public boolean isList(String path) {
 		// Get the value
@@ -952,9 +1015,41 @@ public class ConfigurationSection {
     		return false;
     	}
 	}
-	
+
+    /**
+     * Check whether the current configuration section is a proper configuration section.
+     *
+     * @return True if the current configuration section is a proper configuration section.
+     */
+	public boolean isSection() {
+	    return isSection("");
+    }
+
+    /**
+     * Check whether the given path is a configuration section.
+     * Alias for {@code isSection(path)}.
+     *
+     * @param path Path of the configuration section.
+     *
+     * @return True if the given path is a configuration section.
+     */
+    public boolean isSection(String path) {
+        return isConfigurationSection(path);
+    }
+
+    /**
+     * Check whether the current configuration section is a proper configuration section.
+     *
+     * @return True if the current configuration section is a proper configuration section.
+     */
+    public boolean isConfigurationSection() {
+        return isConfigurationSection("");
+    }
+
 	/**
      * Check whether the given path is a configuration section.
+     *
+     * @param path Path of the configuration section.
      *
 	 * @return True if the given path is a configuration section.
 	 */
