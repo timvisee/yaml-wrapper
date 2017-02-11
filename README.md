@@ -44,8 +44,11 @@ Include the following repository and dependency in your Maven configuration to u
 ```
 
 ### Usage without Maven
-The JAR-files for the YAML wrapper library can be found on our [Jenkins](http://ci.xephi.fr/job/YamlWrapper/), the latest JAR-file can be found [here](http://ci.xephi.fr/job/YamlWrapper/lastSuccessfulBuild/artifact/target/).
+To download the JAR-file see the [Downloads](#Download) section, the latest JAR-file can be found [here](http://ci.xephi.fr/job/YamlWrapper/lastSuccessfulBuild/artifact/target/).
 This JAR-file should be added as _library_ to your own project, in order to use it.
+
+## Download
+The JAR-files for the YAML wrapper library can be found and downloaded from on our [Jenkins](http://ci.xephi.fr/job/YamlWrapper/) page, the latest JAR-file can be found [here](http://ci.xephi.fr/job/YamlWrapper/lastSuccessfulBuild/artifact/target/).
 It is recommended however, to compile your own JAR-file using Maven whenever that's possible.
 
 ## Example
