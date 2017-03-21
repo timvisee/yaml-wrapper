@@ -62,7 +62,7 @@ A runnable usage example is included in the [Example.java](src/main/java/com/tim
 ## Builds
 The project is currently being built automatically using the CI services in the table below.
 
-|Service|Platform|Branch|Build Status||
+|Service|Platform|Branch|Build Status| |
 |:---:|:---:|:---:|:---|---|
 |Jenkins|Linux|master|[![Build status on Jenkins](https://img.shields.io/jenkins/s/https/ci.xephi.fr/job/YamlWrapper.svg)](http://ci.xephi.fr/job/YamlWrapper/)|[View status](http://ci.xephi.fr/job/YamlWrapper/)|
 |Travis CI|Linux|master|[![Build status on Travis CI](https://travis-ci.org/timvisee/yaml-wrapper.svg?branch=master)](https://travis-ci.org/timvisee/yaml-wrapper)|[View status](https://travis-ci.org/timvisee/yaml-wrapper)|
