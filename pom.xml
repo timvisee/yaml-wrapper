@@ -22,7 +22,7 @@
 
     <ciManagement>
         <system>jenkins</system>
-        <url>http://ci.xephi.fr/job/YamlWrapper/</url>
+        <url>https://ci.xephi.fr/job/YamlWrapper/</url>
     </ciManagement>
 
     <issueManagement>
@@ -33,7 +33,7 @@
     <licenses>
         <license>
             <name>The GNU General Public Licence version 3 (GPLv3)</name>
-            <url>http://www.gnu.org/licenses/gpl-3.0.html</url>
+            <url>https://www.gnu.org/licenses/gpl-3.0.html</url>
         </license>
     </licenses>
 

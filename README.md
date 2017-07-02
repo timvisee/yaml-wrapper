@@ -29,7 +29,7 @@ Include the following repository and dependency in your Maven configuration to u
     <!-- Xephi repository -->
     <repository>
         <id>xephi-repo</id>
-        <url>http://ci.xephi.fr/plugin/repository/everything/</url>
+        <url>https://ci.xephi.fr/plugin/repository/everything/</url>
     </repository>
 </repositories>
 
@@ -38,7 +38,7 @@ Include the following repository and dependency in your Maven configuration to u
     <dependency>
         <groupId>com.timvisee</groupId>
         <artifactId>yamlwrapper</artifactId>
-        <version>LATEST</version>
+        <version>1.1.1</version>
     </dependency>
 </dependencies>
 ```
@@ -50,10 +50,10 @@ This JAR-file should be added as _library_ to your own project, in order to use 
 ## Download
 |File|Build Status|Download|
 |:---|:---:|:---|
-|JAR library|Latest successful|[Download](http://ci.xephi.fr/job/YamlWrapper/lastSuccessfulBuild/artifact/target/)|
-|ZIP with JAR library|Latest successful|[Download](http://ci.xephi.fr/job/YamlWrapper/lastSuccessfulBuild/artifact/target/*zip*/target.zip)|
+|JAR library|Latest successful|[Download](https://ci.xephi.fr/job/YamlWrapper/lastSuccessfulBuild/artifact/target/)|
+|ZIP with JAR library|Latest successful|[Download](https://ci.xephi.fr/job/YamlWrapper/lastSuccessfulBuild/artifact/target/*zip*/target.zip)|
 
-All JAR-files for the YAML wrapper library can be found and downloaded from on our [Jenkins](http://ci.xephi.fr/job/YamlWrapper/) page.
+All JAR-files for the YAML wrapper library can be found and downloaded from on our [Jenkins](https://ci.xephi.fr/job/YamlWrapper/) page.
 It is recommended however, to compile your own JAR-file using Maven whenever that's possible.
 
 ## Example
