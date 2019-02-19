@@ -5,32 +5,32 @@ public class Configuration extends ConfigurationSection {
     /**
      * Constructor.
      */
-	public Configuration() {
-		super(null, "", null);
-	}
-	
-    /* /**
-     * Get a list of values
-     * @return List of values
-     * /
-    public Map<String, Object> getValues() {
-        Map<String, Object> out = new LinkedHashMap<String, Object>();
+    public Configuration() {
+        super(null, "", null);
+    }
 
-        // Get all the values
-        out.putAll(this.config.getValues());
-        
-        // TODO: Finish this bellow
-        /*Configuration root = getRoot();
-        if (root != null && root.options().copyDefaults()) {
-            ConfigurationSection defaults = getDefaultSection();
+    // /*
+    //  * Get a list of values
+    //  * @return List of values
+    //  */
+    // public Map<String, Object> getValues() {
+    //     Map<String, Object> out = new LinkedHashMap<String, Object>();
 
-            if (defaults != null) {
-                out.putAll(defaults.getValues(deep));
-            }
-        }
+    //     // Get all the values
+    //     out.putAll(this.config.getValues());
 
-        mapChildrenValues(out, this, deep);* /
-        
-        return out;
-    }*/
+    //     // TODO: Finish this bellow
+    //     Configuration root = getRoot();
+    //     if (root != null && root.options().copyDefaults()) {
+    //         ConfigurationSection defaults = getDefaultSection();
+
+    //         if (defaults != null) {
+    //             out.putAll(defaults.getValues(deep));
+    //         }
+    //     }
+
+    //     mapChildrenValues(out, this, deep);
+
+    //     return out;
+    // }
 }

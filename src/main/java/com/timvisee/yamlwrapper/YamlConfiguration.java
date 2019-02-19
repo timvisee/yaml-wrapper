@@ -55,10 +55,10 @@ public class YamlConfiguration extends FileConfiguration {
      *
      * @return String holding the YAML configuration.
      */
-	public String saveToString() {
+    public String saveToString() {
         // Return the configuration string
         return yaml.dump(getValues());
-	}
+    }
 
     /**
      * Load a YAML configuration from the given string.
@@ -68,10 +68,10 @@ public class YamlConfiguration extends FileConfiguration {
      */
     public void loadFromString(String config) {
         // Make sure the contents are not null
-    	if(config == null)
-    		return;
+        if(config == null)
+            return;
 
-    	// Create a map to store the configuration in
+        // Create a map to store the configuration in
         Map<?, ?> input = null;
         try {
             input = (Map<?, ?>) yaml.load(config);
@@ -115,10 +115,10 @@ public class YamlConfiguration extends FileConfiguration {
      */
     public static YamlConfiguration loadFromFile(File file) {
         // Return an empty configuration if the file is null
-    	if(file == null)
-    		return new YamlConfiguration();
+        if(file == null)
+            return new YamlConfiguration();
 
-    	// Create a new configuration instance
+        // Create a new configuration instance
         final YamlConfiguration config = new YamlConfiguration();
 
         // Try to load the configuration file
@@ -141,11 +141,11 @@ public class YamlConfiguration extends FileConfiguration {
      * @return Loaded YAML configuration.
      */
     public static YamlConfiguration loadFromStream(InputStream stream) {
-    	// Return an empty configuration if the stream is null
-    	if(stream == null)
-    		return new YamlConfiguration();
+        // Return an empty configuration if the stream is null
+        if(stream == null)
+            return new YamlConfiguration();
 
-    	// Create a new configuration instance
+        // Create a new configuration instance
         final YamlConfiguration config = new YamlConfiguration();
 
         // Load the configuration
@@ -171,8 +171,8 @@ public class YamlConfiguration extends FileConfiguration {
      */
     private void convertMapsToSections(Map<?, ?> input, ConfigurationSection section) {
         // Loop through the map entries to convert it
-    	for(Map.Entry<?, ?> entry : input.entrySet()) {
-    	    // Get the key and value
+        for(Map.Entry<?, ?> entry : input.entrySet()) {
+            // Get the key and value
             final String key = entry.getKey().toString();
             final Object value = entry.getValue();
 

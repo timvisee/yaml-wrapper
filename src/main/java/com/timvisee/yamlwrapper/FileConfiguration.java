@@ -10,10 +10,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public abstract class FileConfiguration extends Configuration {
-    
-	/**
-	 * Constructor.
-	 */
+
+    /**
+     * Constructor.
+     */
     public FileConfiguration() {
         super();
     }
@@ -27,13 +27,13 @@ public abstract class FileConfiguration extends Configuration {
      */
     public void save(File file) throws IOException {
         // The file may not be null
-    	if(file == null)
-    		return;
+        if(file == null)
+            return;
 
         // Create the parent directories if they don't exist
-    	file.getParentFile().mkdirs();
-    	
-    	// Get the configuration string
+        file.getParentFile().mkdirs();
+
+        // Get the configuration string
         String data = saveToString();
 
         // Construct the file writer
@@ -43,7 +43,7 @@ public abstract class FileConfiguration extends Configuration {
             writer.write(data);
         }
     }
-    
+
     /**
      * Save the configuration to the given file.
      *
@@ -53,10 +53,10 @@ public abstract class FileConfiguration extends Configuration {
      */
     public void save(String filePath) throws IOException {
         // Make sure the file path is not null or empty
-    	if(filePath == null || filePath.equals(""))
-    		return;
-    	
-    	// Save the file
+        if(filePath == null || filePath.equals(""))
+            return;
+
+        // Save the file
         save(new File(filePath));
     }
 
@@ -88,10 +88,10 @@ public abstract class FileConfiguration extends Configuration {
      */
     public void load(InputStream stream) throws IOException {
         // Make sure the input stream is not null
-    	if(stream == null)
-    		return;
+        if(stream == null)
+            return;
 
-    	// Create the proper readers to read the file
+        // Create the proper readers to read the file
         InputStreamReader reader = new InputStreamReader(stream);
         StringBuilder builder = new StringBuilder();
 
@@ -122,10 +122,10 @@ public abstract class FileConfiguration extends Configuration {
      */
     public void load(String file) throws FileNotFoundException, IOException {
         // Make sure the file path is not null
-    	if(file == null || file.equals(""))
-    		return;
+        if(file == null || file.equals(""))
+            return;
 
-    	// Load the file
+        // Load the file
         load(new File(file));
     }
 
