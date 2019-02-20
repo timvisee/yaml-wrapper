@@ -910,7 +910,7 @@ public class ConfigurationSection {
 
         } else {
             // Create a section
-            final ConfigurationSection section = new ConfigurationSection(this, key, value);
+            final ConfigurationSection section = new ConfigurationSection(this, key, null);
             if (this.value instanceof List) {
                 try {
                     @SuppressWarnings("unchecked")
@@ -929,6 +929,9 @@ public class ConfigurationSection {
                 sections.add(section);
                 this.value = sections;
             }
+
+            // Set the sub key and value
+            section.set(subPath, value);
         }
     }
 
