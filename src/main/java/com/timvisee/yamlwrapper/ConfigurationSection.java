@@ -26,7 +26,7 @@ public class ConfigurationSection {
     /**
      * Constructor.
      *
-     * @param key Section key.
+     * @param key   Section key.
      * @param value Section value.
      */
     public ConfigurationSection(String key, Object value) {
@@ -39,8 +39,8 @@ public class ConfigurationSection {
      * Constructor.
      *
      * @param parent Parent section.
-     * @param key Section key.
-     * @param value Section value.
+     * @param key    Section key.
+     * @param value  Section value.
      */
     public ConfigurationSection(ConfigurationSection parent, String key, Object value) {
         this.parent = parent;
@@ -74,7 +74,7 @@ public class ConfigurationSection {
      */
     public ConfigurationSection getRoot() {
         // Check whether this section is the root, return it in that case
-        if(isRoot())
+        if (isRoot())
             return this;
 
         // Return the parent root
@@ -88,18 +88,18 @@ public class ConfigurationSection {
      */
     public String getPath() {
         // Return an empty string if this is the root
-        if(isRoot())
+        if (isRoot())
             return "";
 
         // If the parent configuration section is the root, return the key of the current
-        if(this.parent.isRoot())
+        if (this.parent.isRoot())
             return this.key;
 
         // Create a string builder for the section path
         StringBuilder path = new StringBuilder();
 
         // Append the parent path if his isn't the root
-        if(!isRoot())
+        if (!isRoot())
             path.append(this.parent.getPath()).append(".");
 
         // Append the current path
@@ -141,7 +141,6 @@ public class ConfigurationSection {
      * Get the raw configuration section value.
      *
      * @param path Path of the section.
-     *
      * @return Value to get.
      */
     public Object get(String path) {
@@ -152,27 +151,26 @@ public class ConfigurationSection {
      * Get the raw configuration section value for the given path.
      *
      * @param path Path of the section.
-     * @param def Default value if the section wasn't found.
-     *
+     * @param def  Default value if the section wasn't found.
      * @return Raw section value.
      */
     public Object get(String path, Object def) {
         // Make sure the path is not null
-        if(path == null)
+        if (path == null)
             return def;
 
         // Trim the path
         path = path.trim();
 
         // Is the path leading to this section
-        if(path.equals(""))
+        if (path.equals(""))
             return this.value;
 
         // Get the section this path is leading to
         final ConfigurationSection section = getConfigurationSection(path);
 
         // Make sure the section is not null
-        if(section == null)
+        if (section == null)
             return def;
 
         // Return the value
@@ -183,7 +181,6 @@ public class ConfigurationSection {
      * Get a string value at the given path.
      *
      * @param path Path of the section.
-     *
      * @return String value.
      */
     public String getString(String path) {
@@ -194,8 +191,7 @@ public class ConfigurationSection {
      * Get a string value at the given path.
      *
      * @param path Path of the value.
-     * @param def Default value if the path doesn't exist.
-     *
+     * @param def  Default value if the path doesn't exist.
      * @return String value.
      */
     public String getString(String path, String def) {
@@ -203,11 +199,11 @@ public class ConfigurationSection {
         final Object value = get(path);
 
         // Make sure the value is not null
-        if(value == null)
+        if (value == null)
             return def;
 
         // The value has to be an instance of a boolean
-        if(value instanceof String)
+        if (value instanceof String)
             return (String) value;
         return def;
     }
@@ -225,7 +221,6 @@ public class ConfigurationSection {
      * Check whether the value at the given path is a string.
      *
      * @param path Path of the value.
-     *
      * @return True if the value is a string, false if not.
      */
     public boolean isString(String path) {
@@ -233,7 +228,7 @@ public class ConfigurationSection {
         final Object value = get(path);
 
         // Make sure the value is not null
-        if(value == null)
+        if (value == null)
             return false;
 
         // Is the value an instance of a string
@@ -253,7 +248,6 @@ public class ConfigurationSection {
      * Get an integer value at the given path.
      *
      * @param path Path of the value.
-     *
      * @return Integer value.
      */
     public int getInt(String path) {
@@ -264,8 +258,7 @@ public class ConfigurationSection {
      * Get an integer value at the given path.
      *
      * @param path Path of the value.
-     * @param def Default value if the path doesn't exist.
-     *
+     * @param def  Default value if the path doesn't exist.
      * @return Integer value.
      */
     public int getInt(String path, int def) {
@@ -273,11 +266,11 @@ public class ConfigurationSection {
         final Object value = get(path);
 
         // Make sure the value is not null
-        if(value == null)
+        if (value == null)
             return def;
 
         // Return the value if it's an integer, return the default if not
-        if(value instanceof Integer)
+        if (value instanceof Integer)
             return (int) value;
         return def;
     }
@@ -295,7 +288,6 @@ public class ConfigurationSection {
      * Check whether the value at the given path is an integer.
      *
      * @param path Path of the value.
-     *
      * @return True if the value at the given path is an integer, false if not.
      */
     public boolean isInt(String path) {
@@ -303,7 +295,7 @@ public class ConfigurationSection {
         final Object value = get(path);
 
         // Make sure the value is not null
-        if(value == null)
+        if (value == null)
             return false;
 
         // Is the value an instance of a integer
@@ -323,7 +315,6 @@ public class ConfigurationSection {
      * Get a boolean value at the given path.
      *
      * @param path Path of the value
-     *
      * @return Boolean value.
      */
     public boolean getBoolean(String path) {
@@ -334,8 +325,7 @@ public class ConfigurationSection {
      * Get a boolean value at the given path.
      *
      * @param path Path of the value.
-     * @param def Default value if the key doesn't exist.
-     *
+     * @param def  Default value if the key doesn't exist.
      * @return Boolean value.
      */
     public boolean getBoolean(String path, boolean def) {
@@ -343,11 +333,11 @@ public class ConfigurationSection {
         final Object value = get(path);
 
         // Make sure the value is not null
-        if(value == null)
+        if (value == null)
             return def;
 
         // The value has to be an instance of a boolean
-        if(value instanceof Boolean)
+        if (value instanceof Boolean)
             return (boolean) value;
         return def;
     }
@@ -365,7 +355,6 @@ public class ConfigurationSection {
      * Check whether the value at the given path is a boolean.
      *
      * @param path Path to the value.
-     *
      * @return True if the value at the given path is a boolean, false if not.
      */
     public boolean isBoolean(String path) {
@@ -373,7 +362,7 @@ public class ConfigurationSection {
         final Object value = get(path);
 
         // Make sure the value is not null
-        if(value == null)
+        if (value == null)
             return false;
 
         // Is the value an instance of a boolean
@@ -393,7 +382,6 @@ public class ConfigurationSection {
      * Get a double value at the given path.
      *
      * @param path Path of the value.
-     *
      * @return Double value.
      */
     public double getDouble(String path) {
@@ -404,8 +392,7 @@ public class ConfigurationSection {
      * Get a double value at the given path.
      *
      * @param path Path of the value.
-     * @param def Default value if the key doesn't exist.
-     *
+     * @param def  Default value if the key doesn't exist.
      * @return Double value.
      */
     public double getDouble(String path, double def) {
@@ -413,11 +400,11 @@ public class ConfigurationSection {
         final Object value = get(path);
 
         // Make sure the value is not null
-        if(value == null)
+        if (value == null)
             return def;
 
         // The value has to be an instance of a boolean
-        if(value instanceof Double)
+        if (value instanceof Double)
             return (double) value;
         return def;
     }
@@ -435,7 +422,6 @@ public class ConfigurationSection {
      * Check whether the value at the given path is a double.
      *
      * @param path Path of the value.
-     *
      * @return True if the value at the given path is a double.
      */
     public boolean isDouble(String path) {
@@ -443,7 +429,7 @@ public class ConfigurationSection {
         final Object value = get(path);
 
         // Make sure the value is not null
-        if(value == null)
+        if (value == null)
             return false;
 
         // Is the value an instance of a double
@@ -463,7 +449,6 @@ public class ConfigurationSection {
      * Get a float value at the given path.
      *
      * @param path Path of the value.
-     *
      * @return Float value.
      */
     public float getFloat(String path) {
@@ -474,8 +459,7 @@ public class ConfigurationSection {
      * Get a float value at the given path.
      *
      * @param path Path of the value.
-     * @param def Default value if the key doesn't exist.
-     *
+     * @param def  Default value if the key doesn't exist.
      * @return Float value.
      */
     public float getFloat(String path, float def) {
@@ -483,11 +467,11 @@ public class ConfigurationSection {
         final Object value = get(path);
 
         // Make sure the value is not null
-        if(value == null)
+        if (value == null)
             return def;
 
         // The value has to be an instance of a boolean
-        if(value instanceof Float)
+        if (value instanceof Float)
             return (float) value;
         return def;
     }
@@ -505,7 +489,6 @@ public class ConfigurationSection {
      * Check whether the value at the given path is a float.
      *
      * @param path Path of the value.
-     *
      * @return True if the value at the given path is a float.
      */
     public boolean isFloat(String path) {
@@ -513,7 +496,7 @@ public class ConfigurationSection {
         final Object value = get(path);
 
         // Make sure the value is not null
-        if(value == null)
+        if (value == null)
             return false;
 
         // Is the value an instance of a double
@@ -533,7 +516,6 @@ public class ConfigurationSection {
      * Get a long value at the given path.
      *
      * @param path Path of the value.
-     *
      * @return Long value.
      */
     public long getLong(String path) {
@@ -544,8 +526,7 @@ public class ConfigurationSection {
      * Get a long value at the given path.
      *
      * @param path Path of the value.
-     * @param def Default value if the path doesn't exist.
-     *
+     * @param def  Default value if the path doesn't exist.
      * @return Long value.
      */
     public long getLong(String path, long def) {
@@ -553,11 +534,11 @@ public class ConfigurationSection {
         final Object value = get(path);
 
         // Make sure the value is not null
-        if(value == null)
+        if (value == null)
             return def;
 
         // The value has to be an instance of a long
-        if(value instanceof Long)
+        if (value instanceof Long)
             return (long) value;
         return def;
     }
@@ -575,7 +556,6 @@ public class ConfigurationSection {
      * Check whether the value at the given path is a long.
      *
      * @param path Path of the value.
-     *
      * @return True if the value at the given path is a long.
      */
     public boolean isLong(String path) {
@@ -583,7 +563,7 @@ public class ConfigurationSection {
         final Object value = get(path);
 
         // Make sure the value is not null
-        if(value == null)
+        if (value == null)
             return false;
 
         // Is the value an instance of a long
@@ -603,7 +583,6 @@ public class ConfigurationSection {
      * Get a list of values at the given path.
      *
      * @param path Path of the value containing the list.
-     *
      * @return List of values.
      */
     public List<?> getList(String path) {
@@ -614,8 +593,7 @@ public class ConfigurationSection {
      * Get a list of values at the given path.
      *
      * @param path Path of the value containing the list.
-     * @param def Default value if the path doesn't exist.
-     *
+     * @param def  Default value if the path doesn't exist.
      * @return List of values.
      */
     public List<?> getList(String path, List<?> def) {
@@ -623,11 +601,11 @@ public class ConfigurationSection {
         final Object value = get(path);
 
         // Make sure the value is not null
-        if(value == null)
+        if (value == null)
             return def;
 
         // The value has to be an instance of a boolean
-        if(value instanceof List)
+        if (value instanceof List)
             return (List<?>) value;
         return def;
     }
@@ -645,7 +623,6 @@ public class ConfigurationSection {
      * Check whether the value at the given path is a list of values.
      *
      * @param path Path of the value containing the list.
-     *
      * @return True if the value at the given path is a list of values.
      */
     public boolean isList(String path) {
@@ -653,7 +630,7 @@ public class ConfigurationSection {
         final Object value = get(path);
 
         // Make sure the value is not null
-        if(value == null)
+        if (value == null)
             return false;
 
         // Is the value an instance of a list
@@ -673,35 +650,33 @@ public class ConfigurationSection {
      * Return a list of keys that are inside the given configuration section.
      *
      * @param path Path of the section to get the keys for.
-     *
      * @return List of keys.
      */
     public List<String> getKeys(String path) {
         // Make sure the path is not null
-        if(path == null)
+        if (path == null)
             return new ArrayList<String>();
 
         // Trim the path
         path = path.trim();
 
         // Make sure this configuration section exists
-        if(!isConfigurationSection(path))
+        if (!isConfigurationSection(path))
             return new ArrayList<String>();
 
         // Get the configuration sections to get the keys from
         final ConfigurationSection section = getConfigurationSection(path);
 
         // Make sure the configuration section holds other configuration sections
-        if(!section.isHoldingConfigurationSections())
+        if (!section.isHoldingConfigurationSections())
             return new ArrayList<String>();
 
         // Return the list of keys
-        @SuppressWarnings("unchecked")
-        final List<ConfigurationSection> sections = (List<ConfigurationSection>) section.get("");
+        @SuppressWarnings("unchecked") final List<ConfigurationSection> sections = (List<ConfigurationSection>) section.get("");
         final List<String> keys = new ArrayList<>();
 
         // Create a list of keys
-        for(ConfigurationSection entry : sections)
+        for (ConfigurationSection entry : sections)
             keys.add(entry.getKey());
 
         // Return the list of keys
@@ -712,7 +687,6 @@ public class ConfigurationSection {
      * Get a configuration section.
      *
      * @param path Path of the section.
-     *
      * @return Configuration section.
      */
     public ConfigurationSection getSection(String path) {
@@ -723,46 +697,46 @@ public class ConfigurationSection {
      * Get a configuration section.
      *
      * @param path Path of the section.
-     *
      * @return Configuration section.
      */
     public ConfigurationSection getConfigurationSection(String path) {
         // Make sure the path param is not null
-        if(path == null)
+        if (path == null)
             return null;
 
         // Trim the path
         path = path.trim();
 
         // Is the path locating to this configuration section
-        if(path.equals(""))
+        if (path.equals(""))
             return this;
 
         // Make sure the value of the current section is set
-        if(!isSet(""))
+        if (!isSet(""))
             return null;
 
         // Does the path contain any sub-paths
-        if(!path.contains(".")) {
+        if (!path.contains(".")) {
             // Make sure the path is locating to a configuration section
-            if(!isConfigurationSection(path))
+            if (!isConfigurationSection(path))
                 return null;
 
             // Get and return the configuration section
-            if(this.value instanceof List) {
+            if (this.value instanceof List) {
                 // Get the configuration section
                 try {
                     @SuppressWarnings("unchecked")
                     List<ConfigurationSection> sections = (List<ConfigurationSection>) this.value;
-                    for(ConfigurationSection section : sections) {
-                        if(section == null) 
+                    for (ConfigurationSection section : sections) {
+                        if (section == null)
                             continue;
 
                         // Is this the section we are searching for
-                        if(section.getKey().equals(path))
+                        if (section.getKey().equals(path))
                             return section;
                     }
-                } catch(ClassCastException e) { }
+                } catch (ClassCastException e) {
+                }
                 return null;
 
             } else
@@ -773,24 +747,24 @@ public class ConfigurationSection {
             // Get the keys
             String[] keys = path.split("\\.");
             String key = path;
-            if(keys.length > 0)
+            if (keys.length > 0)
                 key = keys[0];
             String subPath = "";
-            if(keys.length > 1) {
+            if (keys.length > 1) {
                 subPath = keys[1];
-                for(int i = 2; i < keys.length; i++)
+                for (int i = 2; i < keys.length; i++)
                     subPath += "." + keys[i];
             }
 
             // Make sure the key is not empty
-            if(key.equals(""))
+            if (key.equals(""))
                 return this;
 
             // Get the configuration section
             ConfigurationSection section = getConfigurationSection(key);
 
             // Make sure the section is not null
-            if(section == null)
+            if (section == null)
                 return null;
 
             // Get the value from the child section
@@ -803,7 +777,6 @@ public class ConfigurationSection {
      * Alias for {@code createConfigurationSection(path)}.
      *
      * @param path Path of the new section.
-     *
      * @return Instance of the new section, or null if the path was invalid.
      * If the path is an empty string, the current section will be returned.
      */
@@ -815,20 +788,19 @@ public class ConfigurationSection {
      * Create a new configuration section.
      *
      * @param path Path of the new section.
-     *
      * @return Instance of the new section, or null if the path was invalid.
      * If the path is an empty string, the current section will be returned.
      */
     public ConfigurationSection createConfigurationSection(String path) {
         // Make sure the path is not null
-        if(path == null)
+        if (path == null)
             return null;
 
         // Trim the path
         path = path.trim();
 
         // Is the path leading to the current section
-        if(path.equals("")) {
+        if (path.equals("")) {
             // Return this section without resetting the value
             return this;
         }
@@ -836,23 +808,23 @@ public class ConfigurationSection {
         // Get the keys
         String[] keys = path.split("\\.");
         String key = path;
-        if(keys.length > 0)
+        if (keys.length > 0)
             key = keys[0];
         String subPath = "";
-        if(keys.length > 1) {
+        if (keys.length > 1) {
             subPath = keys[1];
-            for(int i = 2; i < keys.length; i++)
+            for (int i = 2; i < keys.length; i++)
                 subPath += "." + keys[i];
             subPath = subPath.trim();
         }
 
         // Is the first key of the path leading to an already existing section
-        if(isConfigurationSection(key)) {
+        if (isConfigurationSection(key)) {
             // Get the section
             final ConfigurationSection section = getConfigurationSection(key);
 
             // Are there any sub-keys
-            if(subPath.length() == 0) {
+            if (subPath.length() == 0) {
                 // Return the section
                 return section;
             }
@@ -862,7 +834,7 @@ public class ConfigurationSection {
 
         } else {
             // Create a section
-            if(this.value instanceof List) {
+            if (this.value instanceof List) {
                 try {
                     @SuppressWarnings("unchecked")
                     List<ConfigurationSection> sections = (List<ConfigurationSection>) this.value;
@@ -871,14 +843,15 @@ public class ConfigurationSection {
                     this.value = sections;
 
                     // Are there any sub-keys
-                    if(subPath.length() == 0)
+                    if (subPath.length() == 0)
                         // Return the section
                         return section;
 
                     // Create the sub key sections in the section and return the result
                     return section.createConfigurationSection(subPath);
 
-                } catch(ClassCastException ex) { }
+                } catch (ClassCastException ex) {
+                }
             }
 
             // Create a new section
@@ -888,7 +861,7 @@ public class ConfigurationSection {
             this.value = sections;
 
             // Are there any sub-keys
-            if(subPath.length() == 0)
+            if (subPath.length() == 0)
                 // Return the section
                 return section;
 
@@ -911,37 +884,34 @@ public class ConfigurationSection {
      * Set a value.
      * The type of the value is determined automatically.
      *
-     * @param path Path of the value.
+     * @param path  Path of the value.
      * @param value The actual value.
      */
     public void set(String path, Object value) {
         // Make sure the path is not null
-        if(path == null)
+        if (path == null)
             return;
 
         // Trim the path
         path = path.trim();
 
         // Is the path leading to this section
-        if(path.equals("")) {
+        if (path.equals("")) {
             this.value = value;
             return;
         }
 
         // Get the keys
-        String[] keys = path.split("\\.");
+        String[] nodes = path.split("\\.", 2);
         String key = path;
-        if(keys.length > 0)
-            key = keys[0];
         String subPath = "";
-        if(keys.length > 1) {
-            subPath = keys[1];
-            for(int i = 2; i < keys.length; i++)
-                subPath += "." + keys[i];
-        }
+        if (nodes.length >= 1)
+            key = nodes[0];
+        if (nodes.length >= 2)
+            subPath = nodes[1];
 
         // Is there any section this key leads to
-        if(isConfigurationSection(key)) {
+        if (isConfigurationSection(key)) {
             // Get the section
             final ConfigurationSection section = getConfigurationSection(key);
             section.set(subPath, value);
@@ -949,13 +919,13 @@ public class ConfigurationSection {
         } else {
             // Create a section
             final ConfigurationSection section = new ConfigurationSection(this, key, null);
-            if(this.value instanceof List) {
+            if (this.value instanceof List) {
                 try {
                     @SuppressWarnings("unchecked")
                     List<ConfigurationSection> sections = (List<ConfigurationSection>) this.value;
                     sections.add(section);
 
-                } catch(ClassCastException ex) {
+                } catch (ClassCastException ex) {
                     // Create a new section
                     List<ConfigurationSection> sections = new ArrayList<>();
                     sections.add(section);
@@ -977,19 +947,18 @@ public class ConfigurationSection {
      * Check whether a value is set for the given path.
      *
      * @param path Path of the value.
-     *
      * @return True if a value was set, false if not.
      */
     public boolean isSet(String path) {
         // Make sure the path param is not null
-        if(path == null)
+        if (path == null)
             return false;
 
         // Get the section the path is leading to
         final ConfigurationSection section = getConfigurationSection(path);
 
         // Make sure the section is not null
-        if(section == null)
+        if (section == null)
             return false;
 
         // Is the value of the section null
@@ -1003,15 +972,14 @@ public class ConfigurationSection {
      */
     public boolean isHoldingConfigurationSections() {
         // Is the current value null
-        if(this.value == null)
+        if (this.value == null)
             return false;
 
         try {
-            @SuppressWarnings("unchecked")
-            final List<ConfigurationSection> sections = (List<ConfigurationSection>) this.value;
+            @SuppressWarnings("unchecked") final List<ConfigurationSection> sections = (List<ConfigurationSection>) this.value;
             return sections.size() > 0 && (sections.get(0) != null);
 
-        } catch(ClassCastException e) {
+        } catch (ClassCastException e) {
             return false;
         }
     }
@@ -1030,7 +998,6 @@ public class ConfigurationSection {
      * Alias for {@code isSection(path)}.
      *
      * @param path Path of the configuration section.
-     *
      * @return True if the given path is a configuration section.
      */
     public boolean isSection(String path) {
@@ -1050,48 +1017,46 @@ public class ConfigurationSection {
      * Check whether the given path is a configuration section.
      *
      * @param path Path of the configuration section.
-     *
      * @return True if the given path is a configuration section.
      */
     public boolean isConfigurationSection(String path) {
         // Make sure the path is not null
-        if(path == null)
+        if (path == null)
             return false;
 
         // Trim the path
         path = path.trim();
 
         // Is the path leading to this section
-        if(path.equals(""))
+        if (path.equals(""))
             return true;
 
         // Is the value of this configuration section a list instance, if not it can't hold any sub sections (so return false)
-        if(!(this.value instanceof List))
+        if (!(this.value instanceof List))
             return false;
 
         // Get the list of configuration sections
         try {
-            @SuppressWarnings("unchecked")
-            final List<ConfigurationSection> sections = (List<ConfigurationSection>) this.value;
-            for(ConfigurationSection section : sections) {
+            @SuppressWarnings("unchecked") final List<ConfigurationSection> sections = (List<ConfigurationSection>) this.value;
+            for (ConfigurationSection section : sections) {
                 // Make sure the current entry is not null
-                if(section == null)
+                if (section == null)
                     continue;
 
                 // Get the keys
                 String[] keys = path.split("\\.");
                 String key = path;
-                if(keys.length > 0)
+                if (keys.length > 0)
                     key = keys[0];
                 String subPath = "";
-                if(keys.length > 1) {
+                if (keys.length > 1) {
                     subPath = keys[1];
-                    for(int i = 2; i < keys.length; i++)
+                    for (int i = 2; i < keys.length; i++)
                         subPath += "." + keys[i];
                 }
 
                 // Make sure the key of the current entry equals
-                if(!section.getKey().equals(key))
+                if (!section.getKey().equals(key))
                     continue;
 
                 // Check whether the path is a configuration section
@@ -1100,7 +1065,7 @@ public class ConfigurationSection {
 
             return false;
 
-        } catch(ClassCastException e) {
+        } catch (ClassCastException e) {
             return false;
         }
     }
@@ -1117,21 +1082,21 @@ public class ConfigurationSection {
         final Map<String, Object> out = new LinkedHashMap<>();
 
         // Make sure the value is not null
-        if(this.key == null)
+        if (this.key == null)
             return out;
 
         // Add the values to the 
-        if(this.value instanceof List) {
+        if (this.value instanceof List) {
             try {
                 @SuppressWarnings("unchecked")
                 List<ConfigurationSection> sections = (List<ConfigurationSection>) this.value;
-                for(ConfigurationSection entry : sections)
-                    if(entry.isHoldingConfigurationSections())
+                for (ConfigurationSection entry : sections)
+                    if (entry.isHoldingConfigurationSections())
                         out.put(entry.getKey(), entry.getValues());
                     else
                         out.put(entry.getKey(), entry.get(""));
 
-            } catch(ClassCastException e) {
+            } catch (ClassCastException e) {
                 out.put(getKey(), this.value);
             }
         } else

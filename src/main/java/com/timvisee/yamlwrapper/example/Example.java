@@ -2,7 +2,6 @@ package com.timvisee.yamlwrapper.example;
 
 import com.timvisee.yamlwrapper.YamlConfiguration;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**

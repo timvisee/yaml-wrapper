@@ -68,7 +68,7 @@ public class YamlConfiguration extends FileConfiguration {
      */
     public void loadFromString(String config) {
         // Make sure the contents are not null
-        if(config == null)
+        if (config == null)
             return;
 
         // Create a map to store the configuration in
@@ -81,7 +81,7 @@ public class YamlConfiguration extends FileConfiguration {
         }
 
         // Convert sub-maps to sub-sections
-        if(input != null)
+        if (input != null)
             convertMapsToSections(input, this);
     }
 
@@ -90,7 +90,6 @@ public class YamlConfiguration extends FileConfiguration {
      * An empty configuration object is returned if the file doesn't exist or was invalid.
      *
      * @param filePath File path to load the configuration from.
-     *
      * @return Loaded YAML configuration.
      */
     public static YamlConfiguration loadFromFile(String filePath) {
@@ -98,7 +97,7 @@ public class YamlConfiguration extends FileConfiguration {
         final File file = new File(filePath);
 
         // Make sure the file exists
-        if(!file.isFile())
+        if (!file.isFile())
             return new YamlConfiguration();
 
         // Load the configuration file and return it
@@ -110,12 +109,11 @@ public class YamlConfiguration extends FileConfiguration {
      * An empty configuration object is returned if the file doesn't exist or was invalid.
      *
      * @param file File to load the configuration from.
-     *
      * @return Loaded YAML configuration.
      */
     public static YamlConfiguration loadFromFile(File file) {
         // Return an empty configuration if the file is null
-        if(file == null)
+        if (file == null)
             return new YamlConfiguration();
 
         // Create a new configuration instance
@@ -137,12 +135,11 @@ public class YamlConfiguration extends FileConfiguration {
      * An empty configuration object is returned if the input stream is invalid.
      *
      * @param stream Input stream to load the configuration from.
-     *
      * @return Loaded YAML configuration.
      */
     public static YamlConfiguration loadFromStream(InputStream stream) {
         // Return an empty configuration if the stream is null
-        if(stream == null)
+        if (stream == null)
             return new YamlConfiguration();
 
         // Create a new configuration instance
@@ -165,13 +162,12 @@ public class YamlConfiguration extends FileConfiguration {
      * Since we're not working with maps directly, this method can be used to convert these maps to proper configuration sections.
      * Sub-maps are automatically converted to sub-sections.
      *
-     * @param input Input map, that should be converted.
-     *
+     * @param input   Input map, that should be converted.
      * @param section Base configuration section.
      */
     private void convertMapsToSections(Map<?, ?> input, ConfigurationSection section) {
         // Loop through the map entries to convert it
-        for(Map.Entry<?, ?> entry : input.entrySet()) {
+        for (Map.Entry<?, ?> entry : input.entrySet()) {
             // Get the key and value
             final String key = entry.getKey().toString();
             final Object value = entry.getValue();

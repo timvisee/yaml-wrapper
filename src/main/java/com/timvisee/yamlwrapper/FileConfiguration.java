@@ -1,13 +1,6 @@
 package com.timvisee.yamlwrapper;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public abstract class FileConfiguration extends Configuration {
 
@@ -22,12 +15,11 @@ public abstract class FileConfiguration extends Configuration {
      * Save the configuration to the given file.
      *
      * @param file File to save the configuration in.
-     *
      * @throws IOException Throws if failed to save the configuration to the given file.
      */
     public void save(File file) throws IOException {
         // The file may not be null
-        if(file == null)
+        if (file == null)
             return;
 
         // Create the parent directories if they don't exist
@@ -39,7 +31,7 @@ public abstract class FileConfiguration extends Configuration {
         // Construct the file writer
 
         // Save the data
-        try(FileWriter writer = new FileWriter(file)) {
+        try (FileWriter writer = new FileWriter(file)) {
             writer.write(data);
         }
     }
@@ -48,12 +40,11 @@ public abstract class FileConfiguration extends Configuration {
      * Save the configuration to the given file.
      *
      * @param filePath Path of the file to save the configuration in.
-     *
      * @throws IOException Throws if failed to save the configuration to the given file.
      */
     public void save(String filePath) throws IOException {
         // Make sure the file path is not null or empty
-        if(filePath == null || filePath.equals(""))
+        if (filePath == null || filePath.equals(""))
             return;
 
         // Save the file
@@ -71,9 +62,8 @@ public abstract class FileConfiguration extends Configuration {
      * Load a configuration file from the given file.
      *
      * @param file File to load the configuration from.
-     *
      * @throws FileNotFoundException Throws if the file that was given, doesn't exist.
-     * @throws IOException Throws if failed to load the configuration file.
+     * @throws IOException           Throws if failed to load the configuration file.
      */
     public void load(File file) throws FileNotFoundException, IOException {
         load(new FileInputStream(file));
@@ -83,12 +73,11 @@ public abstract class FileConfiguration extends Configuration {
      * Load the configuration from an input stream.
      *
      * @param stream Input stream to load the configuration from.
-     *
      * @throws IOException Throws if failed to load the configuration from the given input stream.
      */
     public void load(InputStream stream) throws IOException {
         // Make sure the input stream is not null
-        if(stream == null)
+        if (stream == null)
             return;
 
         // Create the proper readers to read the file
@@ -116,13 +105,12 @@ public abstract class FileConfiguration extends Configuration {
      * Load a configuration from the given file path.
      *
      * @param file Path of the file holding the configuration to load.
-     *
      * @throws FileNotFoundException Thrown when the given file path doesn't exist.
-     * @throws IOException Thrown if failed to load the configuration.
+     * @throws IOException           Thrown if failed to load the configuration.
      */
     public void load(String file) throws FileNotFoundException, IOException {
         // Make sure the file path is not null
-        if(file == null || file.equals(""))
+        if (file == null || file.equals(""))
             return;
 
         // Load the file
