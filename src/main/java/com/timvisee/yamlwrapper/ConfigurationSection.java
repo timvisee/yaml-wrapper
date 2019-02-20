@@ -743,18 +743,14 @@ public class ConfigurationSection {
                 return null;
 
         } else {
-
             // Get the keys
-            String[] keys = path.split("\\.");
+            String[] nodes = path.split("\\.", 2);
             String key = path;
-            if (keys.length > 0)
-                key = keys[0];
             String subPath = "";
-            if (keys.length > 1) {
-                subPath = keys[1];
-                for (int i = 2; i < keys.length; i++)
-                    subPath += "." + keys[i];
-            }
+            if (nodes.length >= 1)
+                key = nodes[0];
+            if (nodes.length >= 2)
+                subPath = nodes[1];
 
             // Make sure the key is not empty
             if (key.equals(""))
@@ -806,17 +802,13 @@ public class ConfigurationSection {
         }
 
         // Get the keys
-        String[] keys = path.split("\\.");
+        String[] nodes = path.split("\\.", 2);
         String key = path;
-        if (keys.length > 0)
-            key = keys[0];
         String subPath = "";
-        if (keys.length > 1) {
-            subPath = keys[1];
-            for (int i = 2; i < keys.length; i++)
-                subPath += "." + keys[i];
-            subPath = subPath.trim();
-        }
+        if (nodes.length >= 1)
+            key = nodes[0];
+        if (nodes.length >= 2)
+            subPath = nodes[1];
 
         // Is the first key of the path leading to an already existing section
         if (isConfigurationSection(key)) {
@@ -918,7 +910,7 @@ public class ConfigurationSection {
 
         } else {
             // Create a section
-            final ConfigurationSection section = new ConfigurationSection(this, key, null);
+            final ConfigurationSection section = new ConfigurationSection(this, key, value);
             if (this.value instanceof List) {
                 try {
                     @SuppressWarnings("unchecked")
@@ -937,9 +929,6 @@ public class ConfigurationSection {
                 sections.add(section);
                 this.value = sections;
             }
-
-            // Set the value in the new section
-            section.set(subPath, value);
         }
     }
 
@@ -966,7 +955,7 @@ public class ConfigurationSection {
     }
 
     /**
-     * Check whether this configuration section is holding any sub-sections.
+     * Check whether this configuration section is holding sub-sections.
      *
      * @return True if this section contains any sub-sections.
      */
@@ -977,8 +966,19 @@ public class ConfigurationSection {
 
         try {
             @SuppressWarnings("unchecked") final List<ConfigurationSection> sections = (List<ConfigurationSection>) this.value;
-            return sections.size() > 0 && (sections.get(0) != null);
 
+            for (ConfigurationSection section : sections) {
+                // Skip null sections
+                if (section == null)
+                    continue;
+
+                // This is a configuration section if any item has a key name
+                String key = section.getName();
+                if (key != null && !key.trim().isEmpty())
+                    return true;
+            }
+
+            return false;
         } catch (ClassCastException e) {
             return false;
         }
@@ -1044,16 +1044,13 @@ public class ConfigurationSection {
                     continue;
 
                 // Get the keys
-                String[] keys = path.split("\\.");
+                String[] nodes = path.split("\\.", 2);
                 String key = path;
-                if (keys.length > 0)
-                    key = keys[0];
                 String subPath = "";
-                if (keys.length > 1) {
-                    subPath = keys[1];
-                    for (int i = 2; i < keys.length; i++)
-                        subPath += "." + keys[i];
-                }
+                if (nodes.length >= 1)
+                    key = nodes[0];
+                if (nodes.length >= 2)
+                    subPath = nodes[1];
 
                 // Make sure the key of the current entry equals
                 if (!section.getKey().equals(key))
@@ -1085,7 +1082,7 @@ public class ConfigurationSection {
         if (this.key == null)
             return out;
 
-        // Add the values to the 
+        // Add the values to the
         if (this.value instanceof List) {
             try {
                 @SuppressWarnings("unchecked")
