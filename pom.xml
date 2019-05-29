@@ -22,7 +22,7 @@
 
     <ciManagement>
         <system>jenkins</system>
-        <url>https://ci.xephi.fr/job/YamlWrapper/</url>
+        <url>https://repo.codemc.org/#browse/browse:maven-public:com%2Ftimvisee%2Fyamlwrapper</url>
     </ciManagement>
 
     <issueManagement>

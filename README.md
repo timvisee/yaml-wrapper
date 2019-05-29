@@ -29,7 +29,7 @@ Include the following repository and dependency in your Maven configuration to u
     <!-- Xephi repository -->
     <repository>
         <id>xephi-repo</id>
-        <url>https://ci.xephi.fr/plugin/repository/everything/</url>
+        <url>https://repo.codemc.org/repository/maven-public/</url>
     </repository>
 </repositories>
 
