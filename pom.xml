@@ -115,7 +115,7 @@
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
             <scope>compile</scope>
-            <version>1.26</version>
+            <version>1.31</version>
         </dependency>
     </dependencies>
 </project>
